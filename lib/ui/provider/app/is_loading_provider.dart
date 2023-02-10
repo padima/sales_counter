@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/adapters.dart';
+import 'package:sales_counter/ui/provider/app/sales_provider.dart';
+import 'package:sales_counter/ui/provider/app/settings_provider.dart';
 
 class LoadingNotifier extends StateNotifier<bool> {
   final Ref _ref;
@@ -11,6 +14,11 @@ class LoadingNotifier extends StateNotifier<bool> {
 
   Future<void> loadApp() async {
     try {
+      await _ref.read(settingsProvider.notifier).loadSettings();
+      if (_ref.read(settingsProvider).seller) {
+        await Hive.initFlutter('sales_counter');
+        await _ref.read(salesProvider.notifier).initial();
+      }
       state = true;
     } catch (e) {
       log(e.toString());
