@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:sales_counter/data/model/settings_model.dart';
 import 'package:sales_counter/data/source/i_secure_storage_source.dart';
@@ -13,19 +14,42 @@ class SettingsRepository extends ISettingsRepository {
   final ISecureStorageSource _secureStoreSource;
 
   @override
-  Future<ISettings?> loadSettings() async {
-    final stringSettings = await _secureStoreSource.read('appSettings');
-    if (stringSettings == null) return SettingsModel.empty();
-    return SettingsModel.fromMap(
-      json.decode(stringSettings) as Map<String, dynamic>,
-    );
+  Future<ISettings> loadSettings() async {
+    try {
+      final stringSettings = await _secureStoreSource.read('appSettingsSalesCounter');
+      return SettingsModel.fromMap(
+        json.decode(stringSettings) as Map<String, dynamic>,
+      );
+    } catch (error, stackTrace) {
+      assert(() {
+        log(
+          'Error:$error',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return true;
+      }());
+      rethrow;
+    }
   }
 
   @override
   void saveSetting(ISettings? appSettings) {
-    if (appSettings == null) return;
-    final jsonSettings = json.encode(appSettings.toMap());
-    _secureStoreSource.write('appSettings', jsonSettings);
+    try {
+      if (appSettings == null) return;
+      final jsonSettings = json.encode(appSettings.toMap());
+      _secureStoreSource.write('appSettingsSalesCounter', jsonSettings);
+    } catch (error, stackTrace) {
+      assert(() {
+        log(
+          'Error:$error',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return true;
+      }());
+      rethrow;
+    }
   }
 
   @override

@@ -1,9 +1,11 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeState {
-  HomeState();
+  final String userID;
 
-  factory HomeState.empty() => HomeState();
+  HomeState({required this.userID});
+
+  factory HomeState.empty() => HomeState(userID: '');
 }
 
 class HomePresenterNotifier extends StateNotifier<HomeState> {

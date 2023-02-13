@@ -14,19 +14,6 @@ class SettingsModel extends ISettings {
   });
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is ISettings &&
-          runtimeType == other.runtimeType &&
-          userId == other.userId &&
-          userName == other.userName &&
-          userEmail == other.userEmail &&
-          seller == other.seller);
-
-  @override
-  int get hashCode => userId.hashCode ^ userName.hashCode ^ userEmail.hashCode ^ seller.hashCode;
-
-  @override
   ISettings copyWith({
     String? userId,
     String? userName,

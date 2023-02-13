@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sales_counter/core/resources/app_routes.dart';
 import 'package:sales_counter/ui/provider/repository/navigator_key_provider.dart';
+import 'package:sales_counter/ui/screen/home/home_screen_widget.dart';
 
 class _MainNavigator extends ChangeNotifier {
   _MainNavigator(this._ref);
@@ -17,7 +18,7 @@ class _MainNavigator extends ChangeNotifier {
         return _buildPageWithDefaultTransition<void>(
           context: context,
           state: state,
-          child: const SizedBox(),
+          child: const HomeScreenWidget(),
           //   routes: [
           //     GoRoute(
           //       path: screenArticle,

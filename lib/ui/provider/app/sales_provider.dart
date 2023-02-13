@@ -1,37 +1,89 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive/hive.dart';
+import 'package:sales_counter/data/model/sales_model.dart';
+import 'package:sales_counter/domain/entity/data/i_sales.dart';
+import 'package:sales_counter/ui/provider/repository/local_storages_repositpry_provider.dart';
 
-class SalesState {
-  const SalesState();
-
-  factory SalesState.empty() => const SalesState();
-}
-
-class SalesNotifier extends StateNotifier<SalesState> {
+class SalesNotifier extends StateNotifier<ISales> {
   final Ref _ref;
-  Box<int>? box;
 
-  SalesNotifier(this._ref) : super(SalesState.empty());
+  SalesNotifier(this._ref) : super(SalesModel.empty());
 
   Future<void> initial() async {
-    box = await Hive.openBox('sales');
+    try {
+      await _ref.read(localStorageRepositoryProvider).init();
+    } catch (error, stackTrace) {
+      //TODO(Pilipenko): add error handling.
+      assert(() {
+        log(
+          'Error:$error',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return true;
+      }());
+      rethrow;
+    }
   }
 
-  int getNumberOfSales(String clientID) {
-    final result = box?.get(clientID) ?? 0;
-    return result;
+  void readSales(String clientID) {
+    try {
+      state = _ref.read(localStorageRepositoryProvider).readData(clientID);
+    } catch (error, stackTrace) {
+      //TODO(Pilipenko): add error handling.
+      assert(() {
+        log(
+          'Error:$error',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return true;
+      }());
+      rethrow;
+    }
   }
 
-  void addSales(String clientID) {
-    final result = (box?.get(clientID) ?? 0) + 1;
-    box?.put(clientID, result);
+  void writeSales() {
+    try {
+      _ref.read(localStorageRepositoryProvider).writeData(state);
+    } catch (error, stackTrace) {
+      //TODO(Pilipenko): add error handling.
+      assert(() {
+        log(
+          'Error:$error',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return true;
+      }());
+      rethrow;
+    }
+  }
+
+  void addCount(String clientID) {
+    state = state.copyWith(count: state.count + 1);
+    writeSales();
   }
 
   @override
   void dispose() {
-    box?.close();
+    try {
+      _ref.read(localStorageRepositoryProvider).dispose();
+    } catch (error, stackTrace) {
+      //TODO(Pilipenko): add error handling.
+      assert(() {
+        log(
+          'Error:$error',
+          error: error,
+          stackTrace: stackTrace,
+        );
+        return true;
+      }());
+      rethrow;
+    }
     super.dispose();
   }
 }
 
-final salesProvider = StateNotifierProvider<SalesNotifier, SalesState>(SalesNotifier.new);
+final salesProvider = StateNotifierProvider<SalesNotifier, ISales>(SalesNotifier.new);

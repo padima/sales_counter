@@ -4,16 +4,30 @@ import 'dart:ui';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sales_counter/sales_counter_app.dart';
+import 'package:sales_counter/ui/sales_counter_app.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   FlutterError.onError = (details) {
-    log(details.toString());
+    assert(() {
+      log(
+        'Error:$details',
+        error: details.exception,
+        stackTrace: details.stack,
+      );
+      return true;
+    }());
     FlutterError.presentError(details);
   };
   PlatformDispatcher.instance.onError = (error, stack) {
-    log('Error: ${error.toString()}, stack: ${stack.toString()}');
+    assert(() {
+      log(
+        'Error:$error',
+        error: error,
+        stackTrace: stack,
+      );
+      return true;
+    }());
     return true;
   };
   runApp(

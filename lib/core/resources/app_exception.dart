@@ -10,3 +10,11 @@ abstract class AppException extends FormatException {
     }
   }
 }
+
+class NullReturnException extends AppException {
+  NullReturnException([super.message = '']);
+}
+
+class NotOpenedStorageException extends AppException {
+  NotOpenedStorageException(super.message);
+}
