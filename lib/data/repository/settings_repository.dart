@@ -14,9 +14,9 @@ class SettingsRepository extends ISettingsRepository {
   final ISecureStorageSource _secureStoreSource;
 
   @override
-  Future<ISettings> loadSettings() async {
+  Future<ISettings> readSettings() async {
     try {
-      final stringSettings = await _secureStoreSource.read('appSettingsSalesCounter');
+      final stringSettings = await _secureStoreSource.readData('appSettingsSalesCounter');
       return SettingsModel.fromMap(
         json.decode(stringSettings) as Map<String, dynamic>,
       );
@@ -29,16 +29,16 @@ class SettingsRepository extends ISettingsRepository {
         );
         return true;
       }());
-      rethrow;
+      return SettingsModel.empty();
     }
   }
 
   @override
-  void saveSetting(ISettings? appSettings) {
+  void writeSetting(ISettings? appSettings) {
     try {
       if (appSettings == null) return;
       final jsonSettings = json.encode(appSettings.toMap());
-      _secureStoreSource.write('appSettingsSalesCounter', jsonSettings);
+      _secureStoreSource.writeData('appSettingsSalesCounter', jsonSettings);
     } catch (error, stackTrace) {
       assert(() {
         log(

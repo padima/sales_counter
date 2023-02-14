@@ -2,7 +2,7 @@ import 'package:sales_counter/domain/entity/data/i_settings.dart';
 import 'package:sales_counter/domain/repository/i_repository.dart';
 
 abstract class ISettingsRepository extends IRepository {
-  Future<ISettings?> loadSettings();
+  Future<ISettings?> readSettings();
 
-  void saveSetting(ISettings? appSettings);
+  void writeSetting(ISettings? appSettings);
 }

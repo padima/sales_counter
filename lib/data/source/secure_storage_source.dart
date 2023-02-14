@@ -19,7 +19,7 @@ class SecureStorageSource extends ISecureStorageSource {
   }
 
   @override
-  void write(String key, String value) {
+  void writeData(String key, String value) {
     switch (_platform) {
       case PlatformApp.isAndroid:
         _storage.write(
@@ -38,7 +38,7 @@ class SecureStorageSource extends ISecureStorageSource {
   }
 
   @override
-  Future<String> read(String key) async {
+  Future<String> readData(String key) async {
     final result = await _storage.read(
       key: key,
       aOptions: _platform == PlatformApp.isAndroid ? _getAndroidOptions() : null,
@@ -49,17 +49,23 @@ class SecureStorageSource extends ISecureStorageSource {
     return result;
   }
 
-  IOSOptions _getIOSOptions() => const IOSOptions(accountName: 'sales_counter');
+  IOSOptions _getIOSOptions() {
+    return const IOSOptions(accountName: 'sales_counter');
+  }
 
-  AndroidOptions _getAndroidOptions() => const AndroidOptions(
-        encryptedSharedPreferences: true,
-        preferencesKeyPrefix: 'sales_counter',
-      );
+  AndroidOptions _getAndroidOptions() {
+    return const AndroidOptions(
+      encryptedSharedPreferences: true,
+      preferencesKeyPrefix: 'sales_counter',
+    );
+  }
 
-  WebOptions _getWebOptions() => const WebOptions(
-        dbName: 'sales_counter',
-        publicKey: 'sales_counter',
-      );
+  WebOptions _getWebOptions() {
+    return const WebOptions(
+      dbName: 'sales_counter',
+      publicKey: 'sales_counter',
+    );
+  }
 
   @override
   void dispose() {}

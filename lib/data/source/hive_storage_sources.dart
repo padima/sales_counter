@@ -6,17 +6,7 @@ class HiveStorageSources extends ILocalStorageSource {
   final storages = <String, Box<Map<String, dynamic>>>{};
 
   @override
-  Future<void> dispose() async {
-    await Hive.close();
-  }
-
-  @override
-  Future<void> init() async {
-    await Hive.initFlutter();
-  }
-
-  @override
-  Future<void> openStorage(Map<String, dynamic> settings) async {
+  Future<void> openStorage({required Map<String, dynamic> settings}) async {
     final boxes = settings['openBox'] as List<String>;
     for (final boxName in boxes) {
       final Box<Map<String, dynamic>> box;
@@ -56,5 +46,15 @@ class HiveStorageSources extends ILocalStorageSource {
     } else {
       throw NotOpenedStorageException('Storage not opened, storage name:$storageName.');
     }
+  }
+
+  @override
+  Future<void> dispose() async {
+    await Hive.close();
+  }
+
+  @override
+  Future<void> init() async {
+    await Hive.initFlutter();
   }
 }

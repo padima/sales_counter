@@ -36,7 +36,7 @@ class LocalStorageRepository extends ILocalStorageRepository {
           'sales',
         ],
       };
-      await source.openStorage(settings);
+      await source.openStorage(settings: settings);
     } catch (error, stackTrace) {
       assert(() {
         log(

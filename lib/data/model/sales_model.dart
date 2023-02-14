@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:sales_counter/domain/entity/data/i_sales.dart';
 
 class SalesModel extends ISales {
@@ -28,6 +29,18 @@ class SalesModel extends ISales {
   }
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ISales &&
+          runtimeType == other.runtimeType &&
+          userID == other.userID &&
+          count == other.count &&
+          listEquals(sales, other.sales));
+
+  @override
+  int get hashCode => userID.hashCode ^ count.hashCode ^ sales.hashCode;
+
+  @override
   Map<String, dynamic> toMap() {
     return {
       'userID': userID,
@@ -38,9 +51,10 @@ class SalesModel extends ISales {
 
   factory SalesModel.fromMap(Map<String, dynamic> map) {
     return SalesModel(
-      userID: map['userID'] as String,
-      count: map['count'] as int,
-      sales: map['sales'] as List<String>,
+      userID: map['userID'] as String? ?? '',
+      count: map['count'] as int? ?? 0,
+      // ignore: avoid_dynamic_calls
+      sales: map['sales']?.cast<String>() ?? <String>[],
     );
   }
 //</editor-fold>

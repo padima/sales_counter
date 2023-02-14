@@ -13,18 +13,6 @@ abstract class ISales {
     required this.sales,
   });
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is ISales &&
-          runtimeType == other.runtimeType &&
-          userID == other.userID &&
-          count == other.count &&
-          sales == other.sales);
-
-  @override
-  int get hashCode => userID.hashCode ^ count.hashCode ^ sales.hashCode;
-
   ISales copyWith({
     String? userID,
     int? count,

@@ -1,7 +1,7 @@
 import 'package:sales_counter/data/source/i_source.dart';
 
 abstract class ILocalStorageSource extends ISource {
-  Future<void> openStorage(Map<String, dynamic> settings);
+  Future<void> openStorage({required Map<String, dynamic> settings});
 
   Map<String, dynamic> readStorageData({
     required String storageName,
