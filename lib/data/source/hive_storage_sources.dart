@@ -6,7 +6,9 @@ class HiveStorageSources extends ILocalStorageSource {
   final storages = <String, Box<Map<String, dynamic>>>{};
 
   @override
-  Future<void> openStorage({required Map<String, dynamic> settings}) async {
+  Future<void> openStorage({
+    required Map<String, dynamic> settings,
+  }) async {
     final boxes = settings['openBox'] as List<String>;
     for (final boxName in boxes) {
       final Box<Map<String, dynamic>> box;

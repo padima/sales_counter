@@ -11,7 +11,7 @@ abstract class IUseCaseReturnTypeNoArgument<ReturnType> extends IUseCase {
 }
 
 // ignore: one_member_abstracts
-abstract class IUseCaseNoArgumentReturnVoid extends IUseCase {
+abstract class IUseCaseReturnVoidNoArgument extends IUseCase {
   void call();
 }
 

@@ -41,8 +41,8 @@ class SettingsModel extends ISettings {
   factory SettingsModel.fromMap(Map<String, dynamic> map) {
     return SettingsModel(
       userId: map['userId'] as String,
-      userName: map['userName'] as String,
-      userEmail: map['userEmail'] as String,
+      userName: map['userName'] as String?,
+      userEmail: map['userEmail'] as String?,
       seller: map['seller'] as bool,
     );
   }

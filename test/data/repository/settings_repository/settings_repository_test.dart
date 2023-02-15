@@ -35,7 +35,9 @@ void main() {
       test(
         'SettingsRepository.writeSetting()',
         () {
-          settingsRepository.readSettings();
+          final jsonString = fixtureReader('test/data/model/settings_model/settings_model.json');
+          final settings = SettingsModel.fromMap(json.decode(jsonString));
+          settingsRepository.writeSetting(settings);
           expect(1, 1);
         },
       );

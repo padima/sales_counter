@@ -7,43 +7,34 @@ import 'package:sales_counter/data/source/i_secure_storage_source.dart';
 enum PlatformApp { isAndroid, isOS, isWeb }
 
 class SecureStorageSource extends ISecureStorageSource {
-  final FlutterSecureStorage _storage;
+  late final FlutterSecureStorage _storage;
   late final PlatformApp _platform;
 
-  SecureStorageSource() : _storage = const FlutterSecureStorage() {
+  SecureStorageSource() {
     try {
       _platform = Platform.isAndroid ? PlatformApp.isAndroid : PlatformApp.isOS;
     } catch (e) {
       _platform = PlatformApp.isWeb;
     }
+    _storage = FlutterSecureStorage(
+      aOptions: _getAndroidOptions(),
+      iOptions: _getIOSOptions(),
+      webOptions: _getWebOptions(),
+    );
   }
 
   @override
   void writeData(String key, String value) {
-    switch (_platform) {
-      case PlatformApp.isAndroid:
-        _storage.write(
-          key: key,
-          value: value,
-          aOptions: _getAndroidOptions(),
-        );
-        break;
-      default:
-        _storage.write(
-          key: key,
-          value: value,
-          iOptions: _getIOSOptions(),
-        );
-    }
+    _storage.write(
+      key: key,
+      value: value,
+    );
   }
 
   @override
   Future<String> readData(String key) async {
     final result = await _storage.read(
       key: key,
-      aOptions: _platform == PlatformApp.isAndroid ? _getAndroidOptions() : null,
-      iOptions: _platform == PlatformApp.isOS ? _getIOSOptions() : null,
-      webOptions: _platform == PlatformApp.isWeb ? _getWebOptions() : null,
     );
     if (result == null) throw NullReturnException();
     return result;
@@ -56,7 +47,6 @@ class SecureStorageSource extends ISecureStorageSource {
   AndroidOptions _getAndroidOptions() {
     return const AndroidOptions(
       encryptedSharedPreferences: true,
-      preferencesKeyPrefix: 'sales_counter',
     );
   }
 

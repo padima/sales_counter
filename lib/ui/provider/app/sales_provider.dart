@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sales_counter/data/model/sales_model.dart';
 import 'package:sales_counter/domain/entity/data/i_sales.dart';
-import 'package:sales_counter/ui/provider/repository/local_storages_repositpry_provider.dart';
+import 'package:sales_counter/ui/provider/repository/local_storages_repository_provider.dart';
+import 'package:sales_counter/ui/provider/use_case/sales/read_sales_use_case_provider.dart';
+import 'package:sales_counter/ui/provider/use_case/sales/write_sales_use_case_provider.dart';
 
 class SalesNotifier extends StateNotifier<ISales> {
   final Ref _ref;
@@ -29,7 +31,8 @@ class SalesNotifier extends StateNotifier<ISales> {
 
   void readSales(String clientID) {
     try {
-      state = _ref.read(localStorageRepositoryProvider).readData(clientID);
+      final readSalesUseCase = _ref.read(readSalesUseCaseProvider);
+      state = readSalesUseCase(clientID);
     } catch (error, stackTrace) {
       //TODO(Pilipenko): add error handling.
       assert(() {
@@ -46,7 +49,8 @@ class SalesNotifier extends StateNotifier<ISales> {
 
   void writeSales() {
     try {
-      _ref.read(localStorageRepositoryProvider).writeData(state);
+      final writeSalesUseCase = _ref.read(writeSalesUseCaseProvider);
+      writeSalesUseCase(state);
     } catch (error, stackTrace) {
       //TODO(Pilipenko): add error handling.
       assert(() {
