@@ -3,14 +3,14 @@ import 'package:flutter/widgets.dart';
 @immutable
 abstract class ISettings {
   final String userId;
-  final String? userName;
-  final String? userEmail;
+  final String userName;
+  final String userEmail;
   final bool seller;
 
   const ISettings({
     required this.userId,
-    this.userName,
-    this.userEmail,
+    this.userName = '',
+    this.userEmail = '',
     this.seller = false,
   });
 

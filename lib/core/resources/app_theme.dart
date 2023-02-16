@@ -15,6 +15,10 @@ class _AppTheme {
         color: AppColors.primaryTextColors,
         fontSize: 24,
       ),
+      iconTheme: IconThemeData(
+        size: 32,
+        color: AppColors.primaryTextColors,
+      ),
     ),
   );
 }

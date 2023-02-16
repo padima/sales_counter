@@ -22,7 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "fieldSettingsEMail": MessageLookupByLibrary.simpleMessage("Ел. пошта"),
+        "fieldSettingsName": MessageLookupByLibrary.simpleMessage("Ім\'я"),
+        "fieldSettingsSeller":
+            MessageLookupByLibrary.simpleMessage("Продавець"),
+        "fieldSettingsUserID":
+            MessageLookupByLibrary.simpleMessage("ID користувача"),
         "titleHomeAppBar":
-            MessageLookupByLibrary.simpleMessage("Картка клієнта")
+            MessageLookupByLibrary.simpleMessage("Картка клієнта"),
+        "titleSettingsAppBar":
+            MessageLookupByLibrary.simpleMessage("Налаштування")
       };
 }

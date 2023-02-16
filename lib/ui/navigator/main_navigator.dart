@@ -6,29 +6,31 @@ import 'package:go_router/go_router.dart';
 import 'package:sales_counter/core/resources/app_routes.dart';
 import 'package:sales_counter/ui/provider/repository/navigator_key_provider.dart';
 import 'package:sales_counter/ui/screen/home/home_screen_widget.dart';
+import 'package:sales_counter/ui/screen/settings/settings_screen_widget.dart';
 
 class _MainNavigator extends ChangeNotifier {
   _MainNavigator(this._ref);
 
   final Ref _ref;
+
   final _routes = [
     GoRoute(
       path: AppRoutes.screenHome,
+      routes: [
+        GoRoute(
+          path: AppRoutes.screenSettings,
+          pageBuilder: (context, state) => _buildPageWithDefaultTransition<void>(
+            context: context,
+            state: state,
+            child: const SettingsScreenWidget(),
+          ),
+        ),
+      ],
       pageBuilder: (context, state) {
         return _buildPageWithDefaultTransition<void>(
           context: context,
           state: state,
           child: const HomeScreenWidget(),
-          //   routes: [
-          //     GoRoute(
-          //       path: screenArticle,
-          //       pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
-          //         context: context,
-          //         state: state,
-          //         child: const ArticleScreenWidget(),
-          //       ),
-          //     ),
-          //],
         );
       },
     ),
@@ -40,25 +42,25 @@ class _MainNavigator extends ChangeNotifier {
   ) {
     return null;
   }
-}
 
-CustomTransitionPage _buildPageWithDefaultTransition<T>({
-  required BuildContext context,
-  required GoRouterState state,
-  required Widget child,
-}) {
-  return CustomTransitionPage<T>(
-    key: state.pageKey,
-    child: child,
-    transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      final tween = Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero);
-      final curveTween = CurveTween(curve: Curves.ease);
-      return SlideTransition(
-        position: animation.drive(curveTween).drive(tween),
-        child: child,
-      );
-    },
-  );
+  static CustomTransitionPage _buildPageWithDefaultTransition<T>({
+    required BuildContext context,
+    required GoRouterState state,
+    required Widget child,
+  }) {
+    return CustomTransitionPage<T>(
+      key: state.pageKey,
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final tween = Tween<Offset>(begin: const Offset(1.0, 0.0), end: Offset.zero);
+        final curveTween = CurveTween(curve: Curves.ease);
+        return SlideTransition(
+          position: animation.drive(curveTween).drive(tween),
+          child: child,
+        );
+      },
+    );
+  }
 }
 
 final mainNavigatorProvider = Provider<GoRouter>(

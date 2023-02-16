@@ -1,3 +1,8 @@
 {
-  "titleHomeAppBar": "Client card"
+  "titleHomeAppBar": "Client card",
+  "titleSettingsAppBar": "Settings",
+  "fieldSettingsUserID": "User ID",
+  "fieldSettingsName": "Name",
+  "fieldSettingsEMail": "eMail",
+  "fieldSettingsSeller": "Seller"
 }

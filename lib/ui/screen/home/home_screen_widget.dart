@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:sales_counter/core/localized/generated/l10n.dart';
+import 'package:sales_counter/core/resources/app_routes.dart';
+import 'package:sales_counter/ui/navigator/main_navigator.dart';
 import 'package:sales_counter/ui/provider/app/is_loading_provider.dart';
 import 'package:sales_counter/ui/provider/app/settings_provider.dart';
 import 'package:sales_counter/ui/screen/home/home_presenter.dart';
@@ -36,6 +38,14 @@ class _HomeScreenWidget extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.titleHomeAppBar),
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.read(mainNavigatorProvider).go('${AppRoutes.screenHome}${AppRoutes.screenSettings}');
+            },
+            icon: const Icon(Icons.settings),
+          ),
+        ],
       ),
       body: bodyWidget,
     );

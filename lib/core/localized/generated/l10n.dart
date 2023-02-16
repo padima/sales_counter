@@ -59,6 +59,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Settings`
+  String get titleSettingsAppBar {
+    return Intl.message(
+      'Settings',
+      name: 'titleSettingsAppBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User ID`
+  String get fieldSettingsUserID {
+    return Intl.message(
+      'User ID',
+      name: 'fieldSettingsUserID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get fieldSettingsName {
+    return Intl.message(
+      'Name',
+      name: 'fieldSettingsName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `eMail`
+  String get fieldSettingsEMail {
+    return Intl.message(
+      'eMail',
+      name: 'fieldSettingsEMail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seller`
+  String get fieldSettingsSeller {
+    return Intl.message(
+      'Seller',
+      name: 'fieldSettingsSeller',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
