@@ -19,7 +19,7 @@ dependencies:
   # localizations
   intl_utils: ^2.8.1
   # router
-  go_router: ^6.0.7
+  go_router: ^6.0.8
   # QR code generator
   pretty_qr_code: ^2.0.3
   # uuid generator
