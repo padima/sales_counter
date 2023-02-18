@@ -5,30 +5,31 @@ import 'package:sales_counter/ui/provider/app/settings_provider.dart';
 import 'package:sales_counter/ui/widgets/mixin_text_edit_controller_manager.dart';
 
 @immutable
-class SettingsPresenterState {
+class SettingsScreenPresenterState {
   final bool seller;
   final bool isAllowEditID;
 
-  const SettingsPresenterState({
+  const SettingsScreenPresenterState({
     required this.seller,
     this.isAllowEditID = false,
   });
 
-  SettingsPresenterState copyWith({
+  SettingsScreenPresenterState copyWith({
     bool? seller,
     bool? isAllowEditID,
   }) {
-    return SettingsPresenterState(
+    return SettingsScreenPresenterState(
       seller: seller ?? this.seller,
       isAllowEditID: isAllowEditID ?? this.isAllowEditID,
     );
   }
 }
 
-class SettingsPresenterNotifier extends StateNotifier<SettingsPresenterState> with MixinTextEditControllerManager {
+class SettingsScreenPresenterNotifier extends StateNotifier<SettingsScreenPresenterState>
+    with MixinTextEditControllerManager {
   final Ref _ref;
 
-  SettingsPresenterNotifier(this._ref) : super(const SettingsPresenterState(seller: false)) {
+  SettingsScreenPresenterNotifier(this._ref) : super(const SettingsScreenPresenterState(seller: false)) {
     final settings = _ref.read(settingsProvider);
     defaultTextEditingValues = {
       'userId': settings.userId,

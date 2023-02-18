@@ -6,7 +6,7 @@ class TextFieldAllowEditWidget extends StatelessWidget {
     required this.controller,
     required this.isAllowEdit,
     this.icon,
-    this.onTapAllowEdit,
+    this.changeAllowEdit,
     this.keyboardType,
     Key? key,
   }) : super(key: key);
@@ -15,12 +15,13 @@ class TextFieldAllowEditWidget extends StatelessWidget {
   final TextInputType? keyboardType;
   final IconData? icon;
   final bool isAllowEdit;
-  final void Function()? onTapAllowEdit;
+  final void Function()? changeAllowEdit;
   final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
+      alignment: Alignment.bottomRight,
       children: [
         TextField(
           enabled: isAllowEdit,
@@ -33,20 +34,12 @@ class TextFieldAllowEditWidget extends StatelessWidget {
           ),
         ),
         if (!isAllowEdit)
-          Align(
-            alignment: Alignment.centerRight,
-            child: IconButton(
-              constraints: const BoxConstraints(
-                minHeight: 64,
-              ),
-              iconSize: 22,
-              alignment: Alignment.bottomRight,
-              onPressed: onTapAllowEdit,
-              icon: const Icon(
-                Icons.edit,
-                size: 26,
-                color: Colors.blue,
-              ),
+          IconButton(
+            onPressed: changeAllowEdit,
+            icon: const Icon(
+              Icons.edit,
+              size: 26,
+              color: Colors.blue,
             ),
           )
         else

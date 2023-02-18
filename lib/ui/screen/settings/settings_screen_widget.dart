@@ -16,13 +16,11 @@ class SettingsScreenWidget extends StatelessWidget {
 }
 
 class _SettingsScreenWidget extends ConsumerWidget {
-  const _SettingsScreenWidget({
-    Key? key,
-  }) : super(key: key);
+  const _SettingsScreenWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final presenter = ref.read(settingsPresenter.notifier);
+    final presenter = ref.read(settingsScreenPresenter.notifier);
     const divider = SizedBox(height: 15);
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +36,7 @@ class _SettingsScreenWidget extends ConsumerWidget {
                 Consumer(
                   builder: (context, ref, child) {
                     final isAllowEdit = ref.watch(
-                      settingsPresenter.select(
+                      settingsScreenPresenter.select(
                         (value) => value.isAllowEditID,
                       ),
                     );
@@ -46,7 +44,7 @@ class _SettingsScreenWidget extends ConsumerWidget {
                       controller: presenter.getTextEditingController('userId'),
                       labelText: S.current.fieldSettingsUserID,
                       isAllowEdit: isAllowEdit,
-                      onTapAllowEdit: presenter.allowEditId,
+                      changeAllowEdit: presenter.allowEditId,
                     );
                   },
                 ),
@@ -66,7 +64,7 @@ class _SettingsScreenWidget extends ConsumerWidget {
                 Consumer(
                   builder: (context, ref, child) {
                     final seller = ref.watch(
-                      settingsPresenter.select(
+                      settingsScreenPresenter.select(
                         (value) => value.seller,
                       ),
                     );
@@ -86,5 +84,6 @@ class _SettingsScreenWidget extends ConsumerWidget {
   }
 }
 
-final settingsPresenter =
-    StateNotifierProvider.autoDispose<SettingsPresenterNotifier, SettingsPresenterState>(SettingsPresenterNotifier.new);
+final settingsScreenPresenter =
+    StateNotifierProvider.autoDispose<SettingsScreenPresenterNotifier, SettingsScreenPresenterState>(
+        SettingsScreenPresenterNotifier.new);

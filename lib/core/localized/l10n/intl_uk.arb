@@ -1,5 +1,6 @@
 {
-  "titleHomeAppBar": "Картка клієнта",
+  "titleHomeClientAppBar": "Картка клієнта",
+  "titleHomeSellerAppBar": "Продавець",
   "titleSettingsAppBar": "Налаштування",
   "fieldSettingsUserID": "ID користувача",
   "fieldSettingsName": "Ім'я",

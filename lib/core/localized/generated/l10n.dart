@@ -51,10 +51,20 @@ class S {
   }
 
   /// `Client card`
-  String get titleHomeAppBar {
+  String get titleHomeClientAppBar {
     return Intl.message(
       'Client card',
-      name: 'titleHomeAppBar',
+      name: 'titleHomeClientAppBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Seller`
+  String get titleHomeSellerAppBar {
+    return Intl.message(
+      'Seller',
+      name: 'titleHomeSellerAppBar',
       desc: '',
       args: [],
     );

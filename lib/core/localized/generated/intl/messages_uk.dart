@@ -28,8 +28,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Продавець"),
         "fieldSettingsUserID":
             MessageLookupByLibrary.simpleMessage("ID користувача"),
-        "titleHomeAppBar":
+        "titleHomeClientAppBar":
             MessageLookupByLibrary.simpleMessage("Картка клієнта"),
+        "titleHomeSellerAppBar":
+            MessageLookupByLibrary.simpleMessage("Продавець"),
         "titleSettingsAppBar":
             MessageLookupByLibrary.simpleMessage("Налаштування")
       };

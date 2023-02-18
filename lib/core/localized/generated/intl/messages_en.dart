@@ -26,7 +26,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "fieldSettingsName": MessageLookupByLibrary.simpleMessage("Name"),
         "fieldSettingsSeller": MessageLookupByLibrary.simpleMessage("Seller"),
         "fieldSettingsUserID": MessageLookupByLibrary.simpleMessage("User ID"),
-        "titleHomeAppBar": MessageLookupByLibrary.simpleMessage("Client card"),
+        "titleHomeClientAppBar":
+            MessageLookupByLibrary.simpleMessage("Client card"),
+        "titleHomeSellerAppBar": MessageLookupByLibrary.simpleMessage("Seller"),
         "titleSettingsAppBar": MessageLookupByLibrary.simpleMessage("Settings")
       };
 }

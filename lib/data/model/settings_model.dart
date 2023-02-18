@@ -14,6 +14,11 @@ class SettingsModel extends ISettings {
   });
 
   @override
+  String toString() {
+    return 'ISettings{userId: $userId, userName: $userName, userEmail: $userEmail, seller: $seller}';
+  }
+
+  @override
   ISettings copyWith({
     String? userId,
     String? userName,
