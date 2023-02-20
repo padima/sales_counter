@@ -13,14 +13,24 @@ class LoadingNotifier extends StateNotifier<bool> {
 
   Future<void> loadApp() async {
     try {
-      await _ref.read(settingsProvider.notifier).readSettings();
       if (_ref.read(settingsProvider).seller) {
-        await _ref.read(salesProvider.notifier).initial();
+        await loadSales();
       }
+      await _ref.read(settingsProvider.notifier).readSettings();
       state = true;
     } catch (e) {
       log(e.toString());
     }
+  }
+
+  Future<void> loadSales() async {
+    await _ref.read(salesProvider.notifier).initial();
+  }
+
+  Future<void> reload() async {
+    state = false;
+    await Future.delayed(const Duration(milliseconds: 200));
+    await loadApp();
   }
 }
 

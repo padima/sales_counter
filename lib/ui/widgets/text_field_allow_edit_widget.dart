@@ -21,7 +21,7 @@ class TextFieldAllowEditWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.bottomRight,
+      alignment: Alignment.topRight,
       children: [
         TextField(
           enabled: isAllowEdit,
@@ -38,7 +38,7 @@ class TextFieldAllowEditWidget extends StatelessWidget {
             onPressed: changeAllowEdit,
             icon: const Icon(
               Icons.edit,
-              size: 26,
+              size: 16,
               color: Colors.blue,
             ),
           )

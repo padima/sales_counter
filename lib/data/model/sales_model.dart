@@ -8,10 +8,16 @@ class SalesModel extends ISales {
     required super.sales,
   });
 
-  factory SalesModel.empty([String? userID]) => SalesModel(
+  factory SalesModel.emptyClient([String? userID]) => SalesModel(
         userID: userID ?? '',
         count: 0,
         sales: const [],
+      );
+
+  factory SalesModel.empty() => const SalesModel(
+        userID: '',
+        count: 0,
+        sales: [],
       );
 
   //<editor-fold desc="Data Methods">

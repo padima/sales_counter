@@ -44,7 +44,9 @@ class SettingsNotifier extends StateNotifier<ISettings> {
   }
 
   void updateSettings(ISettings settings) {
-    if (settings != state) state = settings;
+    if (settings != state) {
+      state = settings;
+    }
   }
 
   @override

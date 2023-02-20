@@ -60,7 +60,7 @@ class LocalStorageRepository extends ILocalStorageRepository {
       );
       return result;
     } on NullReturnException {
-      return SalesModel.empty(key);
+      return SalesModel.emptyClient(key);
     } on NotOpenedStorageException catch (error, stackTrace) {
       assert(() {
         log(
@@ -70,7 +70,7 @@ class LocalStorageRepository extends ILocalStorageRepository {
         );
         return true;
       }());
-      return SalesModel.empty(key);
+      return SalesModel.emptyClient(key);
     } catch (error, stackTrace) {
       assert(() {
         log(
@@ -80,7 +80,7 @@ class LocalStorageRepository extends ILocalStorageRepository {
         );
         return true;
       }());
-      return SalesModel.empty(key);
+      return SalesModel.emptyClient(key);
     }
   }
 

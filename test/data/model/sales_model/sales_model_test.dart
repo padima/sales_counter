@@ -13,23 +13,19 @@ void main() {
   final salesModel = SalesModel.fromMap(jsonMap);
 
   group(
-    'toMap, fromMap',
+    'SalesModel toMap, fromMap',
     () {
       test(
-        'should return a JSON map containing the proper data',
-        () async {
-          // WHEN
+        'SalesModel toMap',
+        () {
           final result = salesModel.toMap();
-          // THEN
           expect(result, jsonMap);
         },
       );
       test(
-        'should return a valid model',
-        () async {
-          // WHEN
+        'SalesModel fromMap',
+        () {
           final result = SalesModel.fromMap(jsonMap);
-          // THEN
           expect(result, salesModel);
         },
       );

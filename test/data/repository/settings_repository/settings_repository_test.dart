@@ -26,10 +26,12 @@ void main() {
         'SettingsRepository.readSettings()',
         () async {
           final jsonString = fixtureReader('test/data/model/settings_model/settings_model.json');
-          final settings = SettingsModel.fromMap(json.decode(jsonString));
+          final validSettings = SettingsModel.fromMap(
+            json.decode(jsonString),
+          );
           when(() => mockSecureStorageSource.readData('appSettingsSalesCounter')).thenAnswer((_) async => jsonString);
           final result = await settingsRepository.readSettings();
-          expect(result, settings);
+          expect(result, validSettings);
         },
       );
       test(

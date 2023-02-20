@@ -10,7 +10,7 @@ import 'package:sales_counter/ui/provider/use_case/sales/write_sales_use_case_pr
 class SalesNotifier extends StateNotifier<ISales> {
   final Ref _ref;
 
-  SalesNotifier(this._ref) : super(SalesModel.empty());
+  SalesNotifier(this._ref) : super(SalesModel.emptyClient());
 
   Future<void> initial() async {
     try {

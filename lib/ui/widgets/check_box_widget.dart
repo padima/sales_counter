@@ -18,22 +18,29 @@ class CheckBoxWidget extends StatelessWidget {
       children: [
         Expanded(
           child: SizedBox(
-            height: 30,
-            width: 10,
+            height: 48,
+            width: 48,
             child: Checkbox(
-              splashRadius: 10.0,
+              splashRadius: 48,
               value: value,
               onChanged: changeCheckBox != null ? (value) => changeCheckBox!() : null,
             ),
           ),
         ),
         Expanded(
-          flex: 14,
+          flex: 6,
           child: GestureDetector(
             onTap: changeCheckBox,
-            child: Text(
-              name,
-              style: const TextStyle(fontSize: 16),
+            behavior: HitTestBehavior.opaque,
+            child: SizedBox(
+              height: 48,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  name,
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ),
             ),
           ),
         ),

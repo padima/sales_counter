@@ -13,17 +13,17 @@ void main() {
   final model = SettingsModel.fromMap(jsonMap);
 
   group(
-    'toMap, fromMap',
+    'SettingsModel toMap, fromMap',
     () {
       test(
-        'should return a JSON map containing the proper data',
-        () async {
+        'SettingsModel toMap',
+        () {
           expect(model.toMap(), jsonMap);
         },
       );
       test(
-        'should return a valid model',
-        () async {
+        'SettingsModel fromMap',
+        () {
           expect(SettingsModel.fromMap(jsonMap), model);
         },
       );

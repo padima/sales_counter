@@ -11,6 +11,7 @@ class HiveStorageSources extends ILocalStorageSource {
   }) async {
     final boxes = settings['openBox'] as List<String>;
     for (final boxName in boxes) {
+      if (storages[boxName] is Box<Map<String, dynamic>>) return;
       final Box<Map<String, dynamic>> box;
       try {
         box = await Hive.openBox<Map<String, dynamic>>(boxName);

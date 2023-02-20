@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:sales_counter/core/localized/generated/l10n.dart';
+import 'package:sales_counter/core/resources/app_assets.dart';
 import 'package:sales_counter/ui/provider/app/is_loading_provider.dart';
 import 'package:sales_counter/ui/provider/app/settings_provider.dart';
 import 'package:sales_counter/ui/screen/home/home_presenter.dart';
@@ -13,6 +15,11 @@ class HomeScreenWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isDownloaded = ref.watch(isLoadingProvider);
+    ref.listen(settingsProvider, (previous, next) {
+      if (previous != null && !previous.seller && next.seller) {
+        ref.read(isLoadingProvider.notifier).reload();
+      }
+    });
     if (isDownloaded) {
       return const _HomeScreenWidget();
     } else {
@@ -41,6 +48,11 @@ class _HomeScreenSellerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final presenter = ref.watch(homeScreenPresenter.notifier);
+    ref.listen(homeScreenPresenter, (previous, next) {
+      if (previous?.barcodeScan != next.barcodeScan) {
+        ref.read(homeScreenPresenter.notifier).readSalesData();
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.titleHomeSellerAppBar),
@@ -56,7 +68,7 @@ class _HomeScreenSellerWidget extends ConsumerWidget {
         child: const Center(
           child: Icon(Icons.qr_code_scanner, size: 38),
         ),
-        onPressed: () {},
+        onPressed: presenter.getBarcode,
       ),
       bottomNavigationBar: const _BottomNavigationBar(),
     );
@@ -102,7 +114,7 @@ class _BottomNavigationBar extends ConsumerWidget {
         BottomNavigationBarItem(
           activeIcon: const Icon(Icons.business, size: 32),
           icon: const Icon(Icons.business, size: 22),
-          label: S.current.titleHomeClientAppBar,
+          label: S.current.titleHomeSellerAppBar,
           //backgroundColor: Colors.green,
         ),
       ],
@@ -112,12 +124,27 @@ class _BottomNavigationBar extends ConsumerWidget {
   }
 }
 
-class _BodyClientHomeScreenWidget extends StatelessWidget {
+class _BodyClientHomeScreenWidget extends ConsumerWidget {
   const _BodyClientHomeScreenWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return const _ForClientHomeScreenWidget();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final settings = ref.watch(settingsProvider);
+    final presenter = ref.read(homeScreenPresenter.notifier);
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          PrettyQr(
+            image: const AssetImage(AppAssets.imagesLogo),
+            roundEdges: true,
+            size: 300,
+            data: presenter.getClientCardData(),
+          ),
+          if (kDebugMode) Text('id: ${settings.userId}') else const SizedBox.shrink(),
+        ],
+      ),
+    );
   }
 }
 
@@ -127,33 +154,18 @@ class _BodySellerHomeScreenWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final indexPage = ref.watch(homeScreenPresenter.select((value) => value.indexPage));
+    final sales = ref.watch(homeScreenPresenter.select((value) => value.sales));
     if (indexPage == 0) {
-      return const _ForClientHomeScreenWidget();
+      return const Semantics.fromProperties(
+        child: _BodyClientHomeScreenWidget(),
+        properties: SemanticsProperties(label: 'Client card screen.'),
+      );
     } else {
-      return const Placeholder();
+      return const Semantics.fromProperties(
+        child: Placeholder(),
+        properties: SemanticsProperties(label: 'Sales screen.'),
+      );
     }
-  }
-}
-
-class _ForClientHomeScreenWidget extends ConsumerWidget {
-  const _ForClientHomeScreenWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final settings = ref.watch(settingsProvider);
-    final presenterNotifier = ref.read(homeScreenPresenter.notifier);
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          PrettyQr(
-            size: 300,
-            data: presenterNotifier.getClientCardData(),
-          ),
-          if (kDebugMode) Text('id: ${settings.userId}') else const SizedBox.shrink(),
-        ],
-      ),
-    );
   }
 }
 
@@ -162,9 +174,15 @@ class _LoadHomeScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: CircularProgressIndicator(),
+    return const Semantics.fromProperties(
+      properties: SemanticsProperties(
+        label: 'Load app screen.',
+        readOnly: true,
+      ),
+      child: Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
       ),
     );
   }
