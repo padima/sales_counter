@@ -1,9 +1,13 @@
 {
-  "titleHomeClientAppBar": "Картка клієнта",
-  "titleHomeSellerAppBar": "Продавець",
-  "titleSettingsAppBar": "Налаштування",
-  "fieldSettingsUserID": "ID користувача",
-  "fieldSettingsName": "Ім'я",
-  "fieldSettingsEMail": "Ел. пошта",
-  "fieldSettingsSeller": "Продавець"
+  "homeTitleClientAppBar": "Картка клієнта",
+  "homeTitleSellerAppBar": "Продавець",
+  "homeDisplayName": "Ім'я",
+  "homeDisplayEMail": "Ел. пошта",
+  "homeDisplayCount": "Кількість",
+  "homeButtonAddSales": "+1 продаж",
+  "settingsTitleAppBar": "Налаштування",
+  "settingsFieldUserID": "ID користувача",
+  "settingsFieldName": "Ім'я",
+  "settingsFieldEMail": "Ел. пошта",
+  "settingsFieldSeller": "Продавець"
 }

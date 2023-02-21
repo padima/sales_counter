@@ -1,29 +1,20 @@
-import 'dart:convert';
-
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sales_counter/core/resources/app_routes.dart';
-import 'package:sales_counter/data/model/sales_model.dart';
-import 'package:sales_counter/domain/entity/data/i_sales.dart';
 import 'package:sales_counter/ui/navigator/main_navigator.dart';
-import 'package:sales_counter/ui/provider/app/settings_provider.dart';
-import 'package:sales_counter/ui/provider/use_case/sales/read_sales_use_case_provider.dart';
+import 'package:sales_counter/ui/provider/app/sales_provider.dart';
 import 'package:sales_counter/ui/provider/use_case/sales/scan_barcode_use_case_provider.dart';
 
 @immutable
 class HomeScreenState {
   final int indexPage;
-  final String barcodeScan;
-  final ISales sales;
+  final String userName;
+  final String userEmail;
 
   const HomeScreenState({
     this.indexPage = 0,
-    this.barcodeScan = '',
-    this.sales = const SalesModel(
-      userID: '',
-      count: 0,
-      sales: [],
-    ),
+    this.userName = '',
+    this.userEmail = '',
   });
 
   factory HomeScreenState.empty() => const HomeScreenState();
@@ -31,10 +22,13 @@ class HomeScreenState {
   HomeScreenState copyWith({
     int? indexPage,
     String? barcodeScan,
+    String? userName,
+    String? userEmail,
   }) {
     return HomeScreenState(
       indexPage: indexPage ?? this.indexPage,
-      barcodeScan: barcodeScan ?? this.barcodeScan,
+      userName: userName ?? this.userName,
+      userEmail: userEmail ?? this.userEmail,
     );
   }
 }
@@ -43,17 +37,6 @@ class HomeScreenPresenterNotifier extends StateNotifier<HomeScreenState> {
   final Ref _ref;
 
   HomeScreenPresenterNotifier(this._ref) : super(HomeScreenState.empty());
-
-  String getClientCardData() {
-    final settings = _ref.read(settingsProvider);
-    final clientCard = <String, dynamic>{
-      'userId': settings.userId,
-      'userName': settings.userName,
-      'userEmail': settings.userEmail,
-    };
-    final jsonClientCard = json.encode(clientCard);
-    return jsonClientCard;
-  }
 
   void changeIndexPage(int indexPage) {
     if (state.indexPage != indexPage) state = state.copyWith(indexPage: indexPage);
@@ -67,13 +50,16 @@ class HomeScreenPresenterNotifier extends StateNotifier<HomeScreenState> {
     final barcodeScannerUseCase = _ref.read(scanBarcodeUseCase);
     final barcode = await barcodeScannerUseCase();
     state = state.copyWith(
-      barcodeScan: barcode,
-      indexPage: 1,
+      userName: barcode.userName,
+      userEmail: barcode.userEmail,
     );
+    if (barcode.userId != '') {
+      _ref.read(salesProvider.notifier).readSales(barcode.userId);
+      changeIndexPage(1);
+    }
   }
 
-  Future<void> readSalesData() async {
-    final readSalesUseCase = _ref.read(readSalesUseCaseProvider);
-    final resultReadSales = readSalesUseCase(state.barcodeScan);
+  void addSale() {
+    _ref.read(salesProvider.notifier).addSale();
   }
 }

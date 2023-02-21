@@ -51,70 +51,110 @@ class S {
   }
 
   /// `Client card`
-  String get titleHomeClientAppBar {
+  String get homeTitleClientAppBar {
     return Intl.message(
       'Client card',
-      name: 'titleHomeClientAppBar',
+      name: 'homeTitleClientAppBar',
       desc: '',
       args: [],
     );
   }
 
   /// `Seller`
-  String get titleHomeSellerAppBar {
+  String get homeTitleSellerAppBar {
     return Intl.message(
       'Seller',
-      name: 'titleHomeSellerAppBar',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Settings`
-  String get titleSettingsAppBar {
-    return Intl.message(
-      'Settings',
-      name: 'titleSettingsAppBar',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `User ID`
-  String get fieldSettingsUserID {
-    return Intl.message(
-      'User ID',
-      name: 'fieldSettingsUserID',
+      name: 'homeTitleSellerAppBar',
       desc: '',
       args: [],
     );
   }
 
   /// `Name`
-  String get fieldSettingsName {
+  String get homeDisplayName {
     return Intl.message(
       'Name',
-      name: 'fieldSettingsName',
+      name: 'homeDisplayName',
       desc: '',
       args: [],
     );
   }
 
   /// `eMail`
-  String get fieldSettingsEMail {
+  String get homeDisplayEMail {
     return Intl.message(
       'eMail',
-      name: 'fieldSettingsEMail',
+      name: 'homeDisplayEMail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Number`
+  String get homeDisplayCount {
+    return Intl.message(
+      'Number',
+      name: 'homeDisplayCount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `+1 sales`
+  String get homeButtonAddSales {
+    return Intl.message(
+      '+1 sales',
+      name: 'homeButtonAddSales',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Settings`
+  String get settingsTitleAppBar {
+    return Intl.message(
+      'Settings',
+      name: 'settingsTitleAppBar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User ID`
+  String get settingsFieldUserID {
+    return Intl.message(
+      'User ID',
+      name: 'settingsFieldUserID',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get settingsFieldName {
+    return Intl.message(
+      'Name',
+      name: 'settingsFieldName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `eMail`
+  String get settingsFieldEMail {
+    return Intl.message(
+      'eMail',
+      name: 'settingsFieldEMail',
       desc: '',
       args: [],
     );
   }
 
   /// `Seller`
-  String get fieldSettingsSeller {
+  String get settingsFieldSeller {
     return Intl.message(
       'Seller',
-      name: 'fieldSettingsSeller',
+      name: 'settingsFieldSeller',
       desc: '',
       args: [],
     );

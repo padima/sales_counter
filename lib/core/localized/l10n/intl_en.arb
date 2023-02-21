@@ -1,9 +1,13 @@
 {
-  "titleHomeClientAppBar": "Client card",
-  "titleHomeSellerAppBar": "Seller",
-  "titleSettingsAppBar": "Settings",
-  "fieldSettingsUserID": "User ID",
-  "fieldSettingsName": "Name",
-  "fieldSettingsEMail": "eMail",
-  "fieldSettingsSeller": "Seller"
+  "homeTitleClientAppBar": "Client card",
+  "homeTitleSellerAppBar": "Seller",
+  "homeDisplayName": "Name",
+  "homeDisplayEMail": "eMail",
+  "homeDisplayCount": "Number",
+  "homeButtonAddSales": "+1 sales",
+  "settingsTitleAppBar": "Settings",
+  "settingsFieldUserID": "User ID",
+  "settingsFieldName": "Name",
+  "settingsFieldEMail": "eMail",
+  "settingsFieldSeller": "Seller"
 }

@@ -1,9 +1,9 @@
-import 'package:sales_counter/data/source/i_source.dart';
+import 'package:sales_counter/data/source/interface/i_source.dart';
 
 abstract class ILocalStorageSource extends ISource {
   Future<void> openStorage({required Map<String, dynamic> settings});
 
-  Map<String, dynamic> readStorageData({
+  int readStorageData({
     required String storageName,
     required String key,
   });
@@ -11,7 +11,7 @@ abstract class ILocalStorageSource extends ISource {
   void writeStorageData({
     required String storageName,
     required String key,
-    required Map<String, dynamic> values,
+    required int values,
   });
 
   @override

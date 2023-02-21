@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:sales_counter/data/model/settings_model.dart';
 import 'package:sales_counter/data/repository/settings_repository.dart';
-import 'package:sales_counter/data/source/i_secure_storage_source.dart';
+import 'package:sales_counter/data/source/interface/i_secure_storage_source.dart';
 
 import '../../../tools/fixture_reader.dart';
 

@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:sales_counter/core/resources/app_exception.dart';
 import 'package:sales_counter/data/model/sales_model.dart';
-import 'package:sales_counter/data/source/i_local_storage_source.dart';
+import 'package:sales_counter/data/source/interface/i_local_storage_source.dart';
 import 'package:sales_counter/domain/entity/data/i_sales.dart';
 import 'package:sales_counter/domain/repository/i_local_storage_repository.dart';
 
@@ -52,13 +52,14 @@ class LocalStorageRepository extends ILocalStorageRepository {
   @override
   ISales readData(String key) {
     try {
-      final result = SalesModel.fromMap(
-        source.readStorageData(
-          storageName: 'sales',
-          key: key,
-        ),
+      final count = source.readStorageData(
+        storageName: 'sales',
+        key: key,
       );
-      return result;
+      return SalesModel(
+        userID: key,
+        count: count,
+      );
     } on NullReturnException {
       return SalesModel.emptyClient(key);
     } on NotOpenedStorageException catch (error, stackTrace) {
@@ -86,11 +87,12 @@ class LocalStorageRepository extends ILocalStorageRepository {
 
   @override
   void writeData(ISales sales) {
+    if (sales.userID == '') return;
     try {
       source.writeStorageData(
         storageName: 'sales',
         key: sales.userID,
-        values: sales.toMap(),
+        values: sales.count,
       );
     } catch (error, stackTrace) {
       assert(() {

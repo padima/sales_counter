@@ -48,6 +48,7 @@ class SalesNotifier extends StateNotifier<ISales> {
   }
 
   void writeSales() {
+    if (state.userID == '') return;
     try {
       final writeSalesUseCase = _ref.read(writeSalesUseCaseProvider);
       writeSalesUseCase(state);
@@ -65,7 +66,7 @@ class SalesNotifier extends StateNotifier<ISales> {
     }
   }
 
-  void addCount(String clientID) {
+  void addSale() {
     state = state.copyWith(count: state.count + 1);
     writeSales();
   }

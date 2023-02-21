@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:sales_counter/core/resources/app_exception.dart';
-import 'package:sales_counter/data/source/i_secure_storage_source.dart';
+import 'package:sales_counter/data/source/interface/i_secure_storage_source.dart';
 
 enum PlatformApp { isAndroid, isOS, isWeb }
 

@@ -24,7 +24,7 @@ class _SettingsScreenWidget extends ConsumerWidget {
     const divider = SizedBox(height: 15);
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.current.titleSettingsAppBar),
+        title: Text(S.current.settingsTitleAppBar),
       ),
       body: Center(
         child: Padding(
@@ -42,7 +42,7 @@ class _SettingsScreenWidget extends ConsumerWidget {
                     );
                     return TextFieldAllowEditWidget(
                       controller: presenter.getTextEditingController('userId'),
-                      labelText: S.current.fieldSettingsUserID,
+                      labelText: S.current.settingsFieldUserID,
                       isAllowEdit: isAllowEdit,
                       changeAllowEdit: presenter.allowEditId,
                     );
@@ -51,13 +51,13 @@ class _SettingsScreenWidget extends ConsumerWidget {
                 divider,
                 TextFieldWidget(
                   controller: presenter.getTextEditingController('userName'),
-                  labelText: S.current.fieldSettingsName,
+                  labelText: S.current.settingsFieldName,
                   isEnabled: true,
                 ),
                 divider,
                 TextFieldWidget(
                   controller: presenter.getTextEditingController('userEmail'),
-                  labelText: S.current.fieldSettingsEMail,
+                  labelText: S.current.settingsFieldEMail,
                   isEnabled: true,
                 ),
                 divider,
@@ -70,7 +70,7 @@ class _SettingsScreenWidget extends ConsumerWidget {
                     );
                     return CheckBoxWidget(
                       value: seller,
-                      name: S.current.fieldSettingsSeller,
+                      name: S.current.settingsFieldSeller,
                       changeCheckBox: presenter.changeSeller,
                     );
                   },

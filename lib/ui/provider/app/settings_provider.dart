@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sales_counter/data/model/data_barcode_model.dart';
 import 'package:sales_counter/data/model/settings_model.dart';
 import 'package:sales_counter/domain/entity/data/i_settings.dart';
 import 'package:sales_counter/ui/provider/use_case/settings/read_settings_use_case_provider.dart';
@@ -47,6 +49,16 @@ class SettingsNotifier extends StateNotifier<ISettings> {
     if (settings != state) {
       state = settings;
     }
+  }
+
+  String getJsonDataBarcode() {
+    final dataBarcodeModel = DataBarcodeModel(
+      userId: state.userId,
+      userName: state.userName,
+      userEmail: state.userEmail,
+    );
+    final jsonDataBarcode = json.encode(dataBarcodeModel.toMap());
+    return jsonDataBarcode;
   }
 
   @override

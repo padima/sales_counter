@@ -22,13 +22,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "fieldSettingsEMail": MessageLookupByLibrary.simpleMessage("eMail"),
-        "fieldSettingsName": MessageLookupByLibrary.simpleMessage("Name"),
-        "fieldSettingsSeller": MessageLookupByLibrary.simpleMessage("Seller"),
-        "fieldSettingsUserID": MessageLookupByLibrary.simpleMessage("User ID"),
-        "titleHomeClientAppBar":
+        "homeButtonAddSales": MessageLookupByLibrary.simpleMessage("+1 sales"),
+        "homeDisplayCount": MessageLookupByLibrary.simpleMessage("Number"),
+        "homeDisplayEMail": MessageLookupByLibrary.simpleMessage("eMail"),
+        "homeDisplayName": MessageLookupByLibrary.simpleMessage("Name"),
+        "homeTitleClientAppBar":
             MessageLookupByLibrary.simpleMessage("Client card"),
-        "titleHomeSellerAppBar": MessageLookupByLibrary.simpleMessage("Seller"),
-        "titleSettingsAppBar": MessageLookupByLibrary.simpleMessage("Settings")
+        "homeTitleSellerAppBar": MessageLookupByLibrary.simpleMessage("Seller"),
+        "settingsFieldEMail": MessageLookupByLibrary.simpleMessage("eMail"),
+        "settingsFieldName": MessageLookupByLibrary.simpleMessage("Name"),
+        "settingsFieldSeller": MessageLookupByLibrary.simpleMessage("Seller"),
+        "settingsFieldUserID": MessageLookupByLibrary.simpleMessage("User ID"),
+        "settingsTitleAppBar": MessageLookupByLibrary.simpleMessage("Settings")
       };
 }

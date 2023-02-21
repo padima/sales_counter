@@ -22,17 +22,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "fieldSettingsEMail": MessageLookupByLibrary.simpleMessage("Ел. пошта"),
-        "fieldSettingsName": MessageLookupByLibrary.simpleMessage("Ім\'я"),
-        "fieldSettingsSeller":
-            MessageLookupByLibrary.simpleMessage("Продавець"),
-        "fieldSettingsUserID":
-            MessageLookupByLibrary.simpleMessage("ID користувача"),
-        "titleHomeClientAppBar":
+        "homeButtonAddSales": MessageLookupByLibrary.simpleMessage("+1 продаж"),
+        "homeDisplayCount": MessageLookupByLibrary.simpleMessage("Кількість"),
+        "homeDisplayEMail": MessageLookupByLibrary.simpleMessage("Ел. пошта"),
+        "homeDisplayName": MessageLookupByLibrary.simpleMessage("Ім\'я"),
+        "homeTitleClientAppBar":
             MessageLookupByLibrary.simpleMessage("Картка клієнта"),
-        "titleHomeSellerAppBar":
+        "homeTitleSellerAppBar":
             MessageLookupByLibrary.simpleMessage("Продавець"),
-        "titleSettingsAppBar":
+        "settingsFieldEMail": MessageLookupByLibrary.simpleMessage("Ел. пошта"),
+        "settingsFieldName": MessageLookupByLibrary.simpleMessage("Ім\'я"),
+        "settingsFieldSeller":
+            MessageLookupByLibrary.simpleMessage("Продавець"),
+        "settingsFieldUserID":
+            MessageLookupByLibrary.simpleMessage("ID користувача"),
+        "settingsTitleAppBar":
             MessageLookupByLibrary.simpleMessage("Налаштування")
       };
 }

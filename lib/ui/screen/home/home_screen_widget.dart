@@ -5,7 +5,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:sales_counter/core/localized/generated/l10n.dart';
 import 'package:sales_counter/core/resources/app_assets.dart';
+import 'package:sales_counter/core/resources/app_text_style.dart';
 import 'package:sales_counter/ui/provider/app/is_loading_provider.dart';
+import 'package:sales_counter/ui/provider/app/sales_provider.dart';
 import 'package:sales_counter/ui/provider/app/settings_provider.dart';
 import 'package:sales_counter/ui/screen/home/home_presenter.dart';
 
@@ -48,14 +50,9 @@ class _HomeScreenSellerWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final presenter = ref.watch(homeScreenPresenter.notifier);
-    ref.listen(homeScreenPresenter, (previous, next) {
-      if (previous?.barcodeScan != next.barcodeScan) {
-        ref.read(homeScreenPresenter.notifier).readSalesData();
-      }
-    });
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.current.titleHomeSellerAppBar),
+        title: Text(S.current.homeTitleSellerAppBar),
         actions: [
           IconButton(
             onPressed: presenter.goSettingsScreen,
@@ -83,7 +80,7 @@ class _HomeScreenClientWidget extends ConsumerWidget {
     final presenter = ref.watch(homeScreenPresenter.notifier);
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.current.titleHomeClientAppBar),
+        title: Text(S.current.homeTitleClientAppBar),
         actions: [
           IconButton(
             onPressed: presenter.goSettingsScreen,
@@ -108,13 +105,13 @@ class _BottomNavigationBar extends ConsumerWidget {
         BottomNavigationBarItem(
           activeIcon: const Icon(Icons.person, size: 32),
           icon: const Icon(Icons.person, size: 22),
-          label: S.current.titleHomeClientAppBar,
+          label: S.current.homeTitleClientAppBar,
           //backgroundColor: Colors.green,
         ),
         BottomNavigationBarItem(
           activeIcon: const Icon(Icons.business, size: 32),
           icon: const Icon(Icons.business, size: 22),
-          label: S.current.titleHomeSellerAppBar,
+          label: S.current.homeTitleSellerAppBar,
           //backgroundColor: Colors.green,
         ),
       ],
@@ -130,7 +127,7 @@ class _BodyClientHomeScreenWidget extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider);
-    final presenter = ref.read(homeScreenPresenter.notifier);
+    final settingsNotifier = ref.watch(settingsProvider.notifier);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -139,7 +136,7 @@ class _BodyClientHomeScreenWidget extends ConsumerWidget {
             image: const AssetImage(AppAssets.imagesLogo),
             roundEdges: true,
             size: 300,
-            data: presenter.getClientCardData(),
+            data: settingsNotifier.getJsonDataBarcode(),
           ),
           if (kDebugMode) Text('id: ${settings.userId}') else const SizedBox.shrink(),
         ],
@@ -153,17 +150,53 @@ class _BodySellerHomeScreenWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final indexPage = ref.watch(homeScreenPresenter.select((value) => value.indexPage));
-    final sales = ref.watch(homeScreenPresenter.select((value) => value.sales));
-    if (indexPage == 0) {
+    final salesUserID = ref.watch(salesProvider.select((value) => value.userID));
+    final salesCount = ref.watch(salesProvider.select((value) => value.count));
+    final stateHome = ref.watch(homeScreenPresenter);
+    final presenter = ref.read(homeScreenPresenter.notifier);
+    if (stateHome.indexPage == 0) {
       return const Semantics.fromProperties(
         child: _BodyClientHomeScreenWidget(),
         properties: SemanticsProperties(label: 'Client card screen.'),
       );
     } else {
-      return const Semantics.fromProperties(
-        child: Placeholder(),
-        properties: SemanticsProperties(label: 'Sales screen.'),
+      return Semantics.fromProperties(
+        child: Center(
+            child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('id:$salesUserID'),
+            const SizedBox(height: 10),
+            Text(
+              '${S.current.homeDisplayName}:${stateHome.userName}',
+              style: AppTextStyle.bold24TextStyle,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              '${S.current.homeDisplayEMail}:${stateHome.userEmail}',
+              style: AppTextStyle.bold16TextStyle,
+            ),
+            const SizedBox(height: 10),
+            Text(
+              '${S.current.homeDisplayCount}:$salesCount',
+              style: AppTextStyle.bold32TextStyle,
+            ),
+            const SizedBox(height: 20),
+            SizedBox(
+              width: MediaQuery.of(context).size.width - 50,
+              height: 60,
+              child: ElevatedButton(
+                onPressed: presenter.addSale,
+                child: Text(
+                  S.current.homeButtonAddSales,
+                  style: AppTextStyle.bold24TextStyle,
+                ),
+              ),
+            ),
+          ],
+        )),
+        properties: const SemanticsProperties(label: 'Sales screen.'),
       );
     }
   }
