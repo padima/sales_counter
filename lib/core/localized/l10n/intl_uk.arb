@@ -5,9 +5,18 @@
   "homeDisplayEMail": "Ел. пошта",
   "homeDisplayCount": "Кількість",
   "homeButtonAddSales": "+1 продаж",
+  "homeButtonSettings": "Перейти на екран налаштування",
+  "homeSemanticLabelLoad": "Екран завантаження програми",
+  "homeSemanticLabelQRCode": "Дані клієнта QR-код",
+  "homeSemanticLabelButtonClientCard": "Перейти на екран картки клієнта",
+  "homeSemanticLabelButtonSales": "Перейти на екран продажів",
+  "homeSemanticLabelButtonScan": "Сканувати картку клієнта",
+  "homeSemanticLabelScreenClientCard": "Екран картки клієнта",
+  "homeSemanticLabelScreenSales": "Екран продажів",
   "settingsTitleAppBar": "Налаштування",
   "settingsFieldUserID": "ID користувача",
   "settingsFieldName": "Ім'я",
   "settingsFieldEMail": "Ел. пошта",
-  "settingsFieldSeller": "Продавець"
+  "settingsFieldSeller": "Продавець",
+  "allowEdit": "Дозволити редагування"
 }

@@ -110,6 +110,86 @@ class S {
     );
   }
 
+  /// `Go settings screen`
+  String get homeButtonSettings {
+    return Intl.message(
+      'Go settings screen',
+      name: 'homeButtonSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Load app screen`
+  String get homeSemanticLabelLoad {
+    return Intl.message(
+      'Load app screen',
+      name: 'homeSemanticLabelLoad',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `QR code client data`
+  String get homeSemanticLabelQRCode {
+    return Intl.message(
+      'QR code client data',
+      name: 'homeSemanticLabelQRCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go client card screen`
+  String get homeSemanticLabelButtonClientCard {
+    return Intl.message(
+      'Go client card screen',
+      name: 'homeSemanticLabelButtonClientCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Go sales screen`
+  String get homeSemanticLabelButtonSales {
+    return Intl.message(
+      'Go sales screen',
+      name: 'homeSemanticLabelButtonSales',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Scan client card`
+  String get homeSemanticLabelButtonScan {
+    return Intl.message(
+      'Scan client card',
+      name: 'homeSemanticLabelButtonScan',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Client card screen`
+  String get homeSemanticLabelScreenClientCard {
+    return Intl.message(
+      'Client card screen',
+      name: 'homeSemanticLabelScreenClientCard',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sales screen`
+  String get homeSemanticLabelScreenSales {
+    return Intl.message(
+      'Sales screen',
+      name: 'homeSemanticLabelScreenSales',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settingsTitleAppBar {
     return Intl.message(
@@ -155,6 +235,16 @@ class S {
     return Intl.message(
       'Seller',
       name: 'settingsFieldSeller',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow edit`
+  String get allowEdit {
+    return Intl.message(
+      'Allow edit',
+      name: 'allowEdit',
       desc: '',
       args: [],
     );

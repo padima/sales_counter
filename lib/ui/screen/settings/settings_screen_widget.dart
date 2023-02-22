@@ -25,6 +25,7 @@ class _SettingsScreenWidget extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.settingsTitleAppBar),
+        excludeHeaderSemantics: true,
       ),
       body: Center(
         child: Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class TextFieldWidget extends StatelessWidget {
   const TextFieldWidget({
@@ -18,15 +19,18 @@ class TextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      keyboardType: keyboardType,
-      enabled: isEnabled,
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: labelText,
-        icon: icon != null ? Icon(icon) : null,
-        focusedBorder: const UnderlineInputBorder(
-          borderSide: BorderSide(width: 2),
+    return Semantics.fromProperties(
+      properties: SemanticsProperties(label: labelText),
+      child: TextField(
+        keyboardType: keyboardType,
+        enabled: isEnabled,
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: labelText,
+          icon: icon != null ? Icon(icon) : null,
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(width: 2),
+          ),
         ),
       ),
     );

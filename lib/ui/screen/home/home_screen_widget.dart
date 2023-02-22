@@ -53,8 +53,10 @@ class _HomeScreenSellerWidget extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.homeTitleSellerAppBar),
+        excludeHeaderSemantics: true,
         actions: [
           IconButton(
+            tooltip: S.current.homeButtonSettings,
             onPressed: presenter.goSettingsScreen,
             icon: const Icon(Icons.settings),
           ),
@@ -62,6 +64,7 @@ class _HomeScreenSellerWidget extends ConsumerWidget {
       ),
       body: const _BodySellerHomeScreenWidget(),
       floatingActionButton: FloatingActionButton(
+        tooltip: S.current.homeSemanticLabelButtonScan,
         child: const Center(
           child: Icon(Icons.qr_code_scanner, size: 38),
         ),
@@ -81,10 +84,12 @@ class _HomeScreenClientWidget extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.current.homeTitleClientAppBar),
+        excludeHeaderSemantics: true,
         actions: [
           IconButton(
             onPressed: presenter.goSettingsScreen,
             icon: const Icon(Icons.settings),
+            tooltip: S.current.homeTitleClientAppBar,
           ),
         ],
       ),
@@ -100,23 +105,32 @@ class _BottomNavigationBar extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final indexPage = ref.watch(homeScreenPresenter.select((value) => value.indexPage));
     final presenter = ref.watch(homeScreenPresenter.notifier);
-    return BottomNavigationBar(
-      items: [
-        BottomNavigationBarItem(
-          activeIcon: const Icon(Icons.person, size: 32),
-          icon: const Icon(Icons.person, size: 22),
-          label: S.current.homeTitleClientAppBar,
-          //backgroundColor: Colors.green,
-        ),
-        BottomNavigationBarItem(
-          activeIcon: const Icon(Icons.business, size: 32),
-          icon: const Icon(Icons.business, size: 22),
-          label: S.current.homeTitleSellerAppBar,
-          //backgroundColor: Colors.green,
-        ),
-      ],
-      currentIndex: indexPage,
-      onTap: presenter.changeIndexPage,
+    return Semantics.fromProperties(
+      properties: const SemanticsProperties(
+        label: 'Bottom navigation bar',
+        enabled: true,
+      ),
+      child: BottomNavigationBar(
+        enableFeedback: true,
+        items: [
+          BottomNavigationBarItem(
+            tooltip: S.current.homeSemanticLabelButtonClientCard,
+            activeIcon: const Icon(Icons.person, size: 32),
+            icon: const Icon(Icons.person, size: 22),
+            label: S.current.homeTitleClientAppBar,
+            //backgroundColor: Colors.green,
+          ),
+          BottomNavigationBarItem(
+            tooltip: S.current.homeSemanticLabelScreenSales,
+            activeIcon: const Icon(Icons.business, size: 32),
+            icon: const Icon(Icons.business, size: 22),
+            label: S.current.homeTitleSellerAppBar,
+            //backgroundColor: Colors.green,
+          ),
+        ],
+        currentIndex: indexPage,
+        onTap: presenter.changeIndexPage,
+      ),
     );
   }
 }
@@ -128,18 +142,30 @@ class _BodyClientHomeScreenWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final settings = ref.watch(settingsProvider);
     final settingsNotifier = ref.watch(settingsProvider.notifier);
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          PrettyQr(
-            image: const AssetImage(AppAssets.imagesLogo),
-            roundEdges: true,
-            size: 300,
-            data: settingsNotifier.getJsonDataBarcode(),
-          ),
-          if (kDebugMode) Text('id: ${settings.userId}') else const SizedBox.shrink(),
-        ],
+    return Semantics.fromProperties(
+      properties: SemanticsProperties(label: S.current.homeSemanticLabelScreenClientCard),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Semantics.fromProperties(
+              properties: SemanticsProperties(label: S.current.homeSemanticLabelQRCode),
+              child: PrettyQr(
+                image: const AssetImage(AppAssets.imagesLogo),
+                roundEdges: true,
+                size: 300,
+                data: settingsNotifier.getJsonDataBarcode(),
+              ),
+            ),
+            if (kDebugMode)
+              Text(
+                'id: ${settings.userId}',
+                semanticsLabel: 'id',
+              )
+            else
+              const SizedBox.shrink(),
+          ],
+        ),
       ),
     );
   }
@@ -155,48 +181,54 @@ class _BodySellerHomeScreenWidget extends ConsumerWidget {
     final stateHome = ref.watch(homeScreenPresenter);
     final presenter = ref.read(homeScreenPresenter.notifier);
     if (stateHome.indexPage == 0) {
-      return const Semantics.fromProperties(
-        child: _BodyClientHomeScreenWidget(),
-        properties: SemanticsProperties(label: 'Client card screen.'),
-      );
+      return const _BodyClientHomeScreenWidget();
     } else {
       return Semantics.fromProperties(
+        properties: SemanticsProperties(label: S.current.homeSemanticLabelScreenSales),
         child: Center(
             child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('id:$salesUserID'),
+            Text(
+              'id:$salesUserID',
+              semanticsLabel: 'id',
+            ),
             const SizedBox(height: 10),
             Text(
               '${S.current.homeDisplayName}:${stateHome.userName}',
               style: AppTextStyle.bold24TextStyle,
+              semanticsLabel: S.current.homeDisplayName,
             ),
             const SizedBox(height: 10),
             Text(
               '${S.current.homeDisplayEMail}:${stateHome.userEmail}',
               style: AppTextStyle.bold16TextStyle,
+              semanticsLabel: S.current.homeDisplayEMail,
             ),
             const SizedBox(height: 10),
             Text(
               '${S.current.homeDisplayCount}:$salesCount',
               style: AppTextStyle.bold32TextStyle,
+              semanticsLabel: S.current.homeDisplayCount,
             ),
             const SizedBox(height: 20),
             SizedBox(
               width: MediaQuery.of(context).size.width - 50,
               height: 60,
-              child: ElevatedButton(
-                onPressed: presenter.addSale,
-                child: Text(
-                  S.current.homeButtonAddSales,
-                  style: AppTextStyle.bold24TextStyle,
+              child: Semantics.fromProperties(
+                properties: SemanticsProperties(label: S.current.homeButtonAddSales),
+                child: ElevatedButton(
+                  onPressed: presenter.addSale,
+                  child: Text(
+                    S.current.homeButtonAddSales,
+                    style: AppTextStyle.bold24TextStyle,
+                  ),
                 ),
               ),
             ),
           ],
         )),
-        properties: const SemanticsProperties(label: 'Sales screen.'),
       );
     }
   }
@@ -207,14 +239,13 @@ class _LoadHomeScreenWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Semantics.fromProperties(
-      properties: SemanticsProperties(
-        label: 'Load app screen.',
-        readOnly: true,
-      ),
+    return Semantics.fromProperties(
+      properties: SemanticsProperties(label: S.current.homeSemanticLabelLoad),
       child: Scaffold(
         body: Center(
-          child: CircularProgressIndicator(),
+          child: CircularProgressIndicator(
+            semanticsLabel: S.current.homeSemanticLabelLoad,
+          ),
         ),
       ),
     );

@@ -13,6 +13,7 @@ class SalesCounterApp extends ConsumerWidget {
     final router = ref.read(mainNavigatorProvider);
     final appTheme = ref.read(appThemeProvider).tempTheme;
     return MaterialApp.router(
+      title: 'Sales counter App',
       debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: appTheme,

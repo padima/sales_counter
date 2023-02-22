@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:sales_counter/core/localized/generated/l10n.dart';
 
 class TextFieldAllowEditWidget extends StatelessWidget {
   const TextFieldAllowEditWidget({
@@ -20,31 +22,38 @@ class TextFieldAllowEditWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topRight,
-      children: [
-        TextField(
-          enabled: isAllowEdit,
-          keyboardType: keyboardType,
-          controller: controller,
-          decoration: InputDecoration(
-            labelText: labelText,
-            icon: icon != null ? Icon(icon) : null,
-            focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 2)),
-          ),
-        ),
-        if (!isAllowEdit)
-          IconButton(
-            onPressed: changeAllowEdit,
-            icon: const Icon(
-              Icons.edit,
-              size: 16,
-              color: Colors.blue,
+    return Semantics.fromProperties(
+      properties: SemanticsProperties(
+        label: labelText,
+        readOnly: !isAllowEdit,
+      ),
+      child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          TextField(
+            enabled: isAllowEdit,
+            keyboardType: keyboardType,
+            controller: controller,
+            decoration: InputDecoration(
+              labelText: labelText,
+              icon: icon != null ? Icon(icon) : null,
+              focusedBorder: const UnderlineInputBorder(borderSide: BorderSide(width: 2)),
             ),
-          )
-        else
-          const SizedBox.shrink()
-      ],
+          ),
+          if (!isAllowEdit)
+            IconButton(
+              tooltip: S.current.allowEdit,
+              onPressed: changeAllowEdit,
+              icon: const Icon(
+                Icons.edit,
+                size: 16,
+                color: Colors.blue,
+              ),
+            )
+          else
+            const SizedBox.shrink()
+        ],
+      ),
     );
   }
 }

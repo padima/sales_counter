@@ -22,10 +22,29 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "allowEdit":
+            MessageLookupByLibrary.simpleMessage("Дозволити редагування"),
         "homeButtonAddSales": MessageLookupByLibrary.simpleMessage("+1 продаж"),
+        "homeButtonSettings": MessageLookupByLibrary.simpleMessage(
+            "Перейти на екран налаштування"),
         "homeDisplayCount": MessageLookupByLibrary.simpleMessage("Кількість"),
         "homeDisplayEMail": MessageLookupByLibrary.simpleMessage("Ел. пошта"),
         "homeDisplayName": MessageLookupByLibrary.simpleMessage("Ім\'я"),
+        "homeSemanticLabelButtonClientCard":
+            MessageLookupByLibrary.simpleMessage(
+                "Перейти на екран картки клієнта"),
+        "homeSemanticLabelButtonSales":
+            MessageLookupByLibrary.simpleMessage("Перейти на екран продажів"),
+        "homeSemanticLabelButtonScan":
+            MessageLookupByLibrary.simpleMessage("Сканувати картку клієнта"),
+        "homeSemanticLabelLoad":
+            MessageLookupByLibrary.simpleMessage("Екран завантаження програми"),
+        "homeSemanticLabelQRCode":
+            MessageLookupByLibrary.simpleMessage("Дані клієнта QR-код"),
+        "homeSemanticLabelScreenClientCard":
+            MessageLookupByLibrary.simpleMessage("Екран картки клієнта"),
+        "homeSemanticLabelScreenSales":
+            MessageLookupByLibrary.simpleMessage("Екран продажів"),
         "homeTitleClientAppBar":
             MessageLookupByLibrary.simpleMessage("Картка клієнта"),
         "homeTitleSellerAppBar":

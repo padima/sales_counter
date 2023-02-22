@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 class CheckBoxWidget extends StatelessWidget {
   const CheckBoxWidget({
@@ -14,37 +15,42 @@ class CheckBoxWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: SizedBox(
-            height: 48,
-            width: 48,
-            child: Checkbox(
-              splashRadius: 48,
-              value: value,
-              onChanged: changeCheckBox != null ? (value) => changeCheckBox!() : null,
-            ),
-          ),
-        ),
-        Expanded(
-          flex: 6,
-          child: GestureDetector(
-            onTap: changeCheckBox,
-            behavior: HitTestBehavior.opaque,
+    return Semantics.fromProperties(
+      container: true,
+      properties: SemanticsProperties(label: name),
+      child: Row(
+        children: [
+          Expanded(
             child: SizedBox(
               height: 48,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  name,
-                  style: const TextStyle(fontSize: 16),
+              width: 48,
+              child: Checkbox(
+                splashRadius: 48,
+                value: value,
+                onChanged: changeCheckBox != null ? (value) => changeCheckBox!() : null,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 6,
+            child: GestureDetector(
+              onTap: changeCheckBox,
+              behavior: HitTestBehavior.opaque,
+              child: SizedBox(
+                height: 48,
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    name,
+                    style: const TextStyle(fontSize: 16),
+                    semanticsLabel: name,
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

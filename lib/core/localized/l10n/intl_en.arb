@@ -5,9 +5,18 @@
   "homeDisplayEMail": "eMail",
   "homeDisplayCount": "Number",
   "homeButtonAddSales": "+1 sales",
+  "homeButtonSettings": "Go settings screen",
+  "homeSemanticLabelLoad": "Load app screen",
+  "homeSemanticLabelQRCode": "QR code client data",
+  "homeSemanticLabelButtonClientCard": "Go client card screen",
+  "homeSemanticLabelButtonSales": "Go sales screen",
+  "homeSemanticLabelButtonScan": "Scan client card",
+  "homeSemanticLabelScreenClientCard": "Client card screen",
+  "homeSemanticLabelScreenSales": "Sales screen",
   "settingsTitleAppBar": "Settings",
   "settingsFieldUserID": "User ID",
   "settingsFieldName": "Name",
   "settingsFieldEMail": "eMail",
-  "settingsFieldSeller": "Seller"
+  "settingsFieldSeller": "Seller",
+  "allowEdit": "Allow edit"
 }

@@ -1,16 +1,5 @@
-# sales_counter
+# Sales counter
 
-Loyalty "Sales counter"
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Loyalty system "Sales counter" for counting the number of sales to the client.
+The system generates a unique identifier for each customer and generates a qr code that the seller
+can scan and save the number of sales of the customer.

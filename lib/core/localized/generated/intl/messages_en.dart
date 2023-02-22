@@ -22,10 +22,27 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "allowEdit": MessageLookupByLibrary.simpleMessage("Allow edit"),
         "homeButtonAddSales": MessageLookupByLibrary.simpleMessage("+1 sales"),
+        "homeButtonSettings":
+            MessageLookupByLibrary.simpleMessage("Go settings screen"),
         "homeDisplayCount": MessageLookupByLibrary.simpleMessage("Number"),
         "homeDisplayEMail": MessageLookupByLibrary.simpleMessage("eMail"),
         "homeDisplayName": MessageLookupByLibrary.simpleMessage("Name"),
+        "homeSemanticLabelButtonClientCard":
+            MessageLookupByLibrary.simpleMessage("Go client card screen"),
+        "homeSemanticLabelButtonSales":
+            MessageLookupByLibrary.simpleMessage("Go sales screen"),
+        "homeSemanticLabelButtonScan":
+            MessageLookupByLibrary.simpleMessage("Scan client card"),
+        "homeSemanticLabelLoad":
+            MessageLookupByLibrary.simpleMessage("Load app screen"),
+        "homeSemanticLabelQRCode":
+            MessageLookupByLibrary.simpleMessage("QR code client data"),
+        "homeSemanticLabelScreenClientCard":
+            MessageLookupByLibrary.simpleMessage("Client card screen"),
+        "homeSemanticLabelScreenSales":
+            MessageLookupByLibrary.simpleMessage("Sales screen"),
         "homeTitleClientAppBar":
             MessageLookupByLibrary.simpleMessage("Client card"),
         "homeTitleSellerAppBar": MessageLookupByLibrary.simpleMessage("Seller"),
