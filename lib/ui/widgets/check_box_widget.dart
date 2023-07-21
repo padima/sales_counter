@@ -16,7 +16,6 @@ class CheckBoxWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Semantics.fromProperties(
-      container: true,
       properties: SemanticsProperties(label: name),
       child: Row(
         children: [
